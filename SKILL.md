@@ -1,7 +1,11 @@
 ---
 name: videos-de-producto
-description: Crea videos dinámicos y profesionales de productos a partir de fotos y clips: hace un brief guiado (formato, duración, objetivo, inicio, final, oferta, estilo), arma el guion escena por escena y lo produce en Google Flow (prompts listos) o directamente como MP4. Úsala siempre que el usuario pida un video, reel, anuncio en video, creativo animado o TikTok de un producto, mencione Google Flow o Veo, o comparta fotos de un producto y quiera "darles movimiento".
+description: Atajo /referencia: genera una imagen que copia la composición de una foto de referencia cambiando solo la persona, el fondo o el producto (sección 7). Crea videos e imágenes profesionales de productos a partir de fotos reales. Videos - brief guiado (formato, duración, objetivo, inicio, final, oferta, estilo), guion escena por escena y producción en Google Flow (prompts listos) o como MP4. Imágenes - brief guiado (formato, tipo de diseño, títulos, estilo de marketing), ideas de conceptos y piezas listas (anuncios, posts, infografías, portadas, carruseles). Úsala siempre que el usuario pida un video, reel, anuncio, TikTok, imagen, post, banner, infografía, portada, miniatura, carrusel o arte de un producto, mencione Google Flow o Veo, o comparta fotos de un producto y quiera "darles movimiento" o convertirlas en piezas de marketing.
 ---
+
+# Videos e imágenes de producto
+
+Esta skill tiene dos modos: **videos** (secciones 1 a 5) e **imágenes** (sección 6). Si el usuario pide una imagen, un post, un banner, una infografía o un arte, ve directo a la sección 6. Si pide las dos cosas, haz primero el brief de lo que pidió antes y reutiliza paleta, tipo de letra y estilo en la otra pieza, para que todo se vea como una sola marca.
 
 # Videos de producto
 
@@ -107,7 +111,9 @@ Flow no tiene conector propio, así que esta skill lo maneja desde el Chrome del
 1. Lee la skill `chrome-browser` y sigue sus reglas (cargar las herramientas en una sola búsqueda, trabajar en una pestaña nueva, permisos del sitio). Si las herramientas del navegador aún no están activadas, pide al usuario que active la extensión Claude in Chrome y espera.
 2. Verifica la URL actual de Flow con búsqueda web si está disponible (hoy: labs.google/flow). No la des por fija.
 3. Abre Flow en una pestaña nueva. Si pide iniciar sesión, elegir cuenta o aceptar términos, **detente y pide al usuario que lo haga él**. Nunca escribas contraseñas ni aceptes términos o pagos en su nombre.
-4. Las fotos del producto están en el equipo del usuario: pide la ruta exacta de cada archivo para subirlas desde el selector de archivos. Si la subida no es posible por esa vía, pide al usuario que arrastre las fotos a Flow y continúa desde ahí.
+4. Las fotos del producto están en el equipo del usuario. En la práctica, Flow abre el selector de archivos de Windows, que las herramientas del navegador no pueden manejar, y la subida automática falla. Por eso **pídele al usuario desde el principio que suba él las fotos** (botón "Subir archivo multimedia" dentro del selector de fotograma, o arrastrándolas) y avísale qué archivos exactos subir. Luego verifica en la vista previa que subió el correcto: es fácil confundir archivos con nombres parecidos (por ejemplo `.png` y `.jpeg`).
+5. Si una foto es un collage de varias imágenes o trae letreros, **recórtala antes** en fotos separadas y limpias (por ejemplo con PowerShell y `System.Drawing`) y pide al usuario que suba los recortes. Flow animaría el collage como una sola imagen y deformaría el letrero y el corte.
+6. Flow puede mostrar 8 s por clip sin opción de acortarlo. Si es así, genera igual y recorta a la duración del guion en el montaje; el costo en puntos no cambia.
 
 **Por cada escena aprobada, en orden**
 1. Crea o abre un proyecto de Flow con el nombre del producto (una sola vez).
@@ -119,7 +125,8 @@ Flow no tiene conector propio, así que esta skill lo maneja desde el Chrome del
 7. Si pasa, marca el clip y avanza a la siguiente escena.
 
 **Límites y cuidados**
-- **Créditos:** antes de generar, avisa cuántos clips se van a generar y pide confirmación, porque cada uno gasta créditos de su suscripción. Reporta cuántos se gastaron al terminar.
+- **Créditos:** antes de generar, avisa cuántos clips se van a generar y cuántos puntos cuesta cada uno (Flow lo muestra en los ajustes), y pide confirmación. Verifica el saldo si la interfaz lo permite, porque Flow puede quedarse sin puntos a mitad del trabajo. Reporta cuántos se gastaron al terminar. Si se acaban, ofrece: esperar a que se repongan, que el usuario suba de plan él mismo, usar otra cuenta con puntos, o resolver esa escena en el montaje con la foto en movimiento.
+- **Cuenta:** la sesión de Flow puede estar iniciada con una cuenta distinta a la que el usuario espera. Antes de generar, di con qué cuenta se va a gastar y pide confirmación si no es evidente.
 - **Sin pagos ni cambios de plan:** si Flow ofrece comprar créditos o mejorar el plan, no lo hagas; avisa al usuario.
 - **Interfaz cambiante:** si no encuentras un botón o el flujo cambió, no adivines con clics repetidos. Describe lo que ves, busca la función actual y, si sigue sin resolverse, vuelve al modo manual para esa escena.
 - **Diálogos del navegador** (alertas, descargas bloqueadas): no los dejes sin atender; si bloquean el avance, avisa al usuario.
@@ -138,3 +145,95 @@ Si hay una skill de creación de video disponible, cárgala primero y síguela. 
 ## 5. Entrega
 
 Entrega el video (o las fichas de Flow) con un resumen de dos o tres líneas: formato, duración, inicio y final usados. Luego ofrece un solo siguiente paso útil, por ejemplo: la versión en otro formato, o una segunda versión con otro gancho para probar cuál funciona mejor en anuncios.
+
+## 6. Imágenes de producto
+
+Crea imágenes profesionales para vender: anuncios, posts, infografías, portadas, miniaturas, carruseles y fotos para la tienda. Parte siempre de las fotos reales del producto: el cliente debe recibir lo que vio. Mismo canal de uso que los videos (Meta, Reels/TikTok, página de producto, WhatsApp) y mismas reglas de honestidad (sección 3, "Solo afirmaciones reales").
+
+### 6.1 Revisar el material
+Igual que en el paso 1: mira cada foto y anota ángulos, detalles, fondo, calidad y orientación. Si una foto es un collage o trae letreros, recórtala primero. Si falta una toma clave (por ejemplo, el producto en uso), dilo y propón pedirla o generarla.
+
+### 6.2 Brief guiado
+Usa la herramienta de preguntas con opciones si existe (máximo 4 por tanda); si no, una lista numerada corta. No repitas lo que el usuario ya dijo.
+
+1. **Formato y uso** — recomienda según dónde se publica:
+   - 1:1 (1080×1080): feed, página de producto, catálogo.
+   - 4:5 (1080×1350): feed de Facebook/Instagram, el que más espacio ocupa en el celular.
+   - 9:16 (1080×1920): historias, estados de WhatsApp, portada de Reel.
+   - 16:9 (1920×1080): banner web, YouTube, miniatura.
+   - Carrusel de varias imágenes. Si va a varios sitios, diseña en 4:5 o 9:16 con lo importante centrado y deriva el resto.
+2. **Tipo de diseño** — ofrece opciones adaptadas al producto:
+   - Foto limpia de producto (fondo blanco o de color, para tienda).
+   - Foto de estilo de vida (el producto en uso, con la persona y el entorno).
+   - Infografía de beneficios (producto al centro con 3 a 5 etiquetas).
+   - "Formas de uso" o antes/después.
+   - Oferta o promoción (precio, descuento, envío).
+   - Variedad de diseños o colores (cuadrícula o catálogo).
+   - Portada de video o miniatura.
+   - Carrusel: gancho, beneficios, uso, variedad y cierre con llamado a la acción.
+3. **Tipo de títulos** — ofrece estilos y da un ejemplo de cada uno con el producto del usuario:
+   - Pregunta o problema ("¿Llevas a tu peque en moto?").
+   - Beneficio directo ("Talla única, ajuste a su medida").
+   - Oferta ("Pídelo hoy, pago contraentrega"), solo con datos confirmados.
+   - Curiosidad o novedad ("Ahora en 4 diseños").
+   - Nombre de producto con etiqueta (sello como "Talla única" o "Calidad premium").
+   Estructura recomendada: titular corto (máximo 6 a 8 palabras) + subtítulo opcional + una etiqueta o llamado a la acción.
+4. **Estilo de marketing** — tierno y familiar, premium y elegante, vibrante y promocional, minimalista y limpio, o de urgencia y oferta. Propón paleta y dos tipos de letra acordes al producto y a las fotos.
+5. **Objetivo y datos** — vender directo, informar, generar confianza o presentar novedades. Precio, descuento, envío, WhatsApp, logo y página: pide los datos exactos y **nunca los inventes**.
+
+### 6.3 Ideas
+Después del brief, propone entre 4 y 6 conceptos concretos adaptados al producto, cada uno en una o dos líneas (formato, qué se ve, titular y estilo), y deja que el usuario elija uno o combine. Si el usuario pide "más ideas", entrega otras 4 distintas, sin repetir. Cada idea debe aprovechar una ventaja real del producto, no una genérica.
+
+### 6.4 Producción
+Elige la ruta según lo que lleve la imagen:
+
+- **Composición aquí (recomendada para casi todo):** foto real del producto + fondo, textos, etiquetas y logo armados con precisión (HTML renderizado a PNG, `System.Drawing` en PowerShell u otra skill de diseño o documentos si está disponible). El texto sale nítido, con la ortografía y el precio exactos, y el producto no cambia. Úsala siempre que haya texto, precio, sellos o varias piezas con el mismo estilo.
+- **IA para generar tomas o fondos:** Google Flow tiene un modo "Imagen". Úsalo solo para lo que la foto no tiene (un fondo, una escena de estilo de vida), partiendo de una foto real y pidiendo que el producto se mantenga idéntico y que no haya texto, porque la IA deforma las letras. Luego compón el texto aquí. Cada imagen gasta puntos: avisa y pide confirmación como con los videos.
+- Para las demás reglas de Flow (subida de fotos, cuenta, puntos, interfaz cambiante), aplica "Conexión con Flow desde el navegador".
+
+### 6.5 Calidad profesional
+Antes de entregar, la imagen debe cumplir estos puntos:
+
+- **Un solo foco:** el producto es lo más grande y claro, ocupando al menos la mitad del cuadro. No satures.
+- **Jerarquía:** titular > producto > etiquetas > datos de contacto. Máximo dos tipos de letra y de tres a cinco colores, sacados de la foto o de la marca.
+- **Contraste y legibilidad:** el texto debe leerse en el celular. Para comprobarlo, reduce la imagen a unos 360 px de ancho y mírala.
+- **Márgenes y zonas seguras:** deja aire en los bordes; en 9:16 y 4:5 evita la franja inferior y la superior donde las apps ponen botones.
+- **Luz y color coherentes** con las fotos reales. Sin deformar, estirar ni recortar el producto.
+- **Consistencia:** misma paleta, letra y estilo en todas las piezas del mismo producto, y en los videos.
+- **Exportación:** PNG o JPG en sRGB, a las medidas del formato (mínimo 1080 px de ancho).
+- **Derechos y plataformas:** los personajes con licencia (Disney, Sanrio, Paw Patrol, etc.) pueden hacer que Meta rechace el anuncio. Avisa antes de publicar con ellos.
+
+### 6.6 Revisión y entrega
+- Abre la imagen final y revísala: ortografía, texto completo y legible, producto idéntico a la foto, precio, WhatsApp y oferta exactos a lo que dijo el usuario.
+- Entrega los archivos con nombres claros (`producto-formato-concepto.png`) en una carpeta del proyecto, y dile al usuario dónde quedaron.
+- Cierra con dos o tres líneas (formato, concepto, estilo) y ofrece un solo paso siguiente útil: la versión en otro formato, una variante con otro titular para probar A/B, o convertirla en el resto del carrusel.
+
+## 7. Atajo `/referencia` — imagen a partir de una foto de referencia
+
+Cuando el usuario escriba `/referencia`, o diga "como esta foto pero con mi producto", "usa esta referencia" o "quiero que se vea como esta imagen", ejecuta este flujo en vez del brief completo de la sección 6. Sirve para copiar la composición de una foto (pose, encuadre, fondo, luz) y cambiar solo lo que el usuario pida: la persona, el fondo o el producto.
+
+**Datos que da el usuario** (en el mismo mensaje, como rutas de archivo):
+1. **Referencia:** la foto de la composición que quiere imitar.
+2. **Producto:** la foto real del producto que debe aparecer.
+3. **Cambios:** qué se modifica (por ejemplo, de niña a niño, o el color del fondo). Todo lo demás se mantiene igual a la referencia.
+
+**Pasos**
+1. Mira las dos imágenes con la herramienta de lectura. Anota la composición de la referencia y los detalles reales del producto (hombreras, panel estampado, bordes, bandas, hebillas).
+2. Pregunta solo lo que falte, con opciones: color del fondo (recomienda uno que combine con el producto) y si lleva textos o es solo la foto. No repitas lo que el usuario ya dijo.
+3. Genera con **Google Flow en modo Imagen** (Nano Banana). Antes revisa en los ajustes cuántos puntos cuesta: en esta cuenta, las imágenes costaron 0 puntos aunque los videos estuvieran sin saldo. Formato 9:16 por defecto, o el que pida el usuario.
+4. **El usuario sube las dos fotos él mismo** a Flow (botón "Subir archivo" del selector, pegando cada ruta en el campo "Nombre de archivo" de Windows). Las herramientas del navegador no pueden manejar ese selector. Dale las rutas exactas, en orden: primero el producto y después la referencia.
+5. Verifica con una captura que las miniaturas cargadas son las correctas. Si el usuario subió una foto distinta a la que nombró (por ejemplo, otro diseño de la misma serie), dilo, y sigue solo si no afecta el resultado.
+6. Pega este prompt, en inglés, adaptado al caso:
+```
+Use the second image as the exact composition reference: [describe the reference:
+pose, framing, clothing, lighting]. Change [what the user asked to change]. Change the
+background to [color and type]. Replace the [product] with the one from the first
+image, reproduced exactly: [real details of the product]. Do not copy any design
+from the product in the second image. Photorealistic studio photo, vertical 9:16,
+sharp focus. No text, no captions, no logos.
+```
+7. Genera y abre la imagen en grande. Revísala contra la foto real del producto: diseño del estampado, colores, bordes, bandas y hebillas. Si falla, ajusta el prompt y regenera, máximo 2 reintentos.
+8. Muestra el resultado al usuario, dile con honestidad qué cambió respecto al producto real, y **pide permiso para descargarlo** (nombre, origen y tamaño aproximado). Descárgalo desde el botón de descarga del visor de Flow y copia el archivo a la carpeta del proyecto con un nombre claro, como `producto-persona-fondo-9x16.jpg`.
+9. Ofrece un solo paso siguiente: agregarle textos o etiquetas con la sección 6, o hacer más variantes (otro fondo, otro diseño).
+
+**Límites:** las imágenes generadas con IA deben marcarse "Imagen ilustrativa" cuando van con textos publicitarios, y no deben prometer garantías de seguridad. Los personajes con licencia pueden hacer que Meta rechace el anuncio.
