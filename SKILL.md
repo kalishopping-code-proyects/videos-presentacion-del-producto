@@ -99,6 +99,32 @@ Reglas para los prompts:
 
 Cierra con el orden de armado en Scenebuilder y la lista de textos por escena, para que el usuario los ponga en su editor — o ofrece montarlos aquí si sube los clips (ruta mixta).
 
+#### Conexión con Flow desde el navegador (modo automático)
+
+Flow no tiene conector propio, así que esta skill lo maneja desde el Chrome del usuario, donde ya tiene su cuenta de Google y su suscripción. Es el modo por defecto de la Ruta A cuando las herramientas `mcp__claude-in-chrome__*` están disponibles. Si no lo están, usa el modo manual: entrega las fichas y el usuario las ejecuta.
+
+**Antes de empezar**
+1. Lee la skill `chrome-browser` y sigue sus reglas (cargar las herramientas en una sola búsqueda, trabajar en una pestaña nueva, permisos del sitio). Si las herramientas del navegador aún no están activadas, pide al usuario que active la extensión Claude in Chrome y espera.
+2. Verifica la URL actual de Flow con búsqueda web si está disponible (hoy: labs.google/flow). No la des por fija.
+3. Abre Flow en una pestaña nueva. Si pide iniciar sesión, elegir cuenta o aceptar términos, **detente y pide al usuario que lo haga él**. Nunca escribas contraseñas ni aceptes términos o pagos en su nombre.
+4. Las fotos del producto están en el equipo del usuario: pide la ruta exacta de cada archivo para subirlas desde el selector de archivos. Si la subida no es posible por esa vía, pide al usuario que arrastre las fotos a Flow y continúa desde ahí.
+
+**Por cada escena aprobada, en orden**
+1. Crea o abre un proyecto de Flow con el nombre del producto (una sola vez).
+2. Elige el modo de la ficha (*Frames to Video* o *Ingredients to Video*) y el formato (9:16 u otro, según el brief).
+3. Sube la imagen indicada en la ficha.
+4. Pega el prompt exacto de la ficha, sin reescribirlo, y genera.
+5. Espera a que termine la generación. Mira el clip (captura de pantalla) y compáralo con el "Revisar" de la ficha: forma y color del producto, manos, caras, texto deformado.
+6. Si falla la revisión, regenera con un ajuste mínimo del prompt, **máximo 2 reintentos por escena**; luego muestra al usuario el mejor intento y deja que decida. Cada generación gasta créditos.
+7. Si pasa, marca el clip y avanza a la siguiente escena.
+
+**Límites y cuidados**
+- **Créditos:** antes de generar, avisa cuántos clips se van a generar y pide confirmación, porque cada uno gasta créditos de su suscripción. Reporta cuántos se gastaron al terminar.
+- **Sin pagos ni cambios de plan:** si Flow ofrece comprar créditos o mejorar el plan, no lo hagas; avisa al usuario.
+- **Interfaz cambiante:** si no encuentras un botón o el flujo cambió, no adivines con clics repetidos. Describe lo que ves, busca la función actual y, si sigue sin resolverse, vuelve al modo manual para esa escena.
+- **Diálogos del navegador** (alertas, descargas bloqueadas): no los dejes sin atender; si bloquean el avance, avisa al usuario.
+- **Resultado:** al terminar, confirma qué escenas quedaron listas en Flow, cuáles necesitaron reintentos y cuáles requieren decisión del usuario. Luego ordénalas en Scenebuilder según el guion, o descarga los clips si el usuario los quiere para montarlos aquí (ruta mixta).
+
 ### Ruta B — Video hecho aquí
 
 Si hay una skill de creación de video disponible, cárgala primero y síguela. Produce el video con las fotos y clips reales del usuario:
